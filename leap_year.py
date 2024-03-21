@@ -11,7 +11,7 @@ def isleap(year):
     
 leapmonth = []
     
-# 2000年1月1日の何日後かをもとめる
+# 2000年1月1日からの経過日数を計算する
 def days(year, month, day):
     res = 0
 
@@ -20,55 +20,25 @@ def days(year, month, day):
         days_of_month[1] = 29
 
     for y in range(2000, year):
-        # print(y, end=": ")
         if isleap(y):
             res += 366
-            # print(isleap(y), res)
-
         else:
             res += 365
-            # print(isleap(y), res)
 
-    # print("=====")
     for m in range(1, month):
         res += days_of_month[m - 1]
-        # print(m, ": ", res)
 
-    # print("=====")
     for d in range(1, day):
         res += 1
-        # print(d, ": ", res)
-
-        
-
-    # diffyear = year - 2000
-    # diffmonth = month - 1
-    # diffday = day - 1
-    # assert diffyear >= 0
     
     return res
     
+def get_weekday(year: int, month: int, day: int) -> str:
+    week = ["Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri"]
+    
+    index = days(year, month, day) % 7
+    return week[index]
+    
 
 if __name__ == "__main__":
-    # print(isleap(2024))
-    # print(isleap(1900))
-    # print(isleap(2000))
-    
-    # print(days(2000, 1, 3))
-    # print(days(2000, 2, 1))
-    # print(days(2000, 3, 1))
-
-    # print(days(2002, 12, 5))
-
-    dt1 = datetime.datetime(2000, 1, 1)
-
-
-    week = ["Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri"]
-
-
-    dt3 = datetime.datetime(2024, 3, 18)
-    print(days(2024, 3, 18))
-
-
-    print(days(2024, 3, 18))
-    print(week[days(2024, 3, 18) % 7])
+    print(get_weekday(2024, 3, 21))
